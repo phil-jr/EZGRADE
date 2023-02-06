@@ -1,3 +1,1 @@
 # EZGRADE
-
-*Hello
