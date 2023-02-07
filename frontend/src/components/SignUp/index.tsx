@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { signUpStudent } from '../../services/StudentService';
 import './index.css'
 
 interface FormValues {
@@ -25,8 +26,16 @@ const SignUp: React.FC = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const res = await signUpStudent({
+      firstName: "Betty",
+      lastName: "White",
+      email: "bw@em.com",
+      password: "pword",
+    });
+
+    console.log(res);
     // Add logic to handle the form submission here
   };
 
