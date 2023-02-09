@@ -2,44 +2,18 @@ package com.example.ezgrade.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "students")
 public class Student {
-    @Column(name = "student_id")
+
     private String studentId;
-
-    @Column(name = "first_name")
     private String firstName;
-    
-    @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "email")
     private String email;
-    
-    @Column(name = "password")
     private String password;
-
-    @Column(name = "phone_number")
     private String phoneNumber;
-    
-    @Column(name = "address")
     private String address;
-
-    @Column(name = "city")
     private String city;
-
-    @Column(name = "state")
     private String state;
-
-    @Column(name = "zipcode")
     private String zipcode;
-
-    @Column(name = "creation_date")
     private Date creationDate;
     
     // Constructors
