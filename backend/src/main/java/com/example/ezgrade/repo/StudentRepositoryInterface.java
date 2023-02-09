@@ -1,14 +1,15 @@
 package com.example.ezgrade.repo;
 
-import org.springframework.http.ResponseEntity;
-
+import com.example.ezgrade.model.GenericResponse;
 import com.example.ezgrade.model.SignIn;
 import com.example.ezgrade.model.Student;
 
 public interface StudentRepositoryInterface {
 
-    public ResponseEntity<Student> signUp(Student student);
+    public GenericResponse signUp(Student student);
 
-    public ResponseEntity<Student> signIn(SignIn signIn);
+    public GenericResponse signIn(SignIn signIn);
+
+    public Student getStudent(String studentId);
 
 }

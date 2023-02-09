@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.ezgrade.model.GenericResponse;
 import com.example.ezgrade.model.SignIn;
 import com.example.ezgrade.model.Student;
 import com.example.ezgrade.repo.StudentRepository;
@@ -18,12 +19,16 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public ResponseEntity<Student> signUp(Student student) {
+    public GenericResponse signUp(Student student) {
         return studentRepository.signUp(student);
     }
 
-    public ResponseEntity<Student> signIn(SignIn signIn) {
+    public GenericResponse signIn(SignIn signIn) {
         return studentRepository.signIn(signIn);
+    }
+
+    public Student getStudent(String studentId) {
+        return studentRepository.getStudent(studentId);
     }
 
 }

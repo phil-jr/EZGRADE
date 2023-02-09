@@ -1,18 +1,25 @@
 package com.example.ezgrade.repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.example.ezgrade.constants.ResponseMessage;
+import com.example.ezgrade.constants.ReturnStatus;
+import com.example.ezgrade.mapper.StudentMapper;
+import com.example.ezgrade.model.GenericResponse;
 import com.example.ezgrade.model.SignIn;
 import com.example.ezgrade.model.Student;
 import com.example.ezgrade.util.RandomUtil;
 
 import static com.example.ezgrade.constants.StudentsSql.INSERT_STUDENT;
 import static com.example.ezgrade.constants.StudentsSql.SIGN_IN_STUDENT;
+import static com.example.ezgrade.constants.StudentsSql.SELECT_STUDENT_BY_ID;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.example.ezgrade.constants.StudentsSql.INSERT_STUDENT_TOKEN;
 
 
@@ -29,7 +36,10 @@ public class StudentRepository implements StudentRepositoryInterface {
     RandomUtil randomUtil;
 
     @Override
-    public ResponseEntity<Student> signUp(Student student) {
+    public GenericResponse signUp(Student student) {
+
+        List<String> errors = new ArrayList<String>();
+        GenericResponse res = new GenericResponse(ReturnStatus.OK, null);
 
         try {
         
@@ -49,18 +59,22 @@ public class StudentRepository implements StudentRepositoryInterface {
                 student.getZipcode()
             });
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+            return res;
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            errors.add(ResponseMessage.BASE_ERROR);
+            res.setStatus(ReturnStatus.ERROR);
+            res.setErrors(errors);
+            return res;
+        }
     }
 
     @Override
-    public ResponseEntity<Student> signIn(SignIn signIn) {
+    public GenericResponse signIn(SignIn signIn) {
 
-        ResponseEntity<Student> failResponse = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        
+        List<String> errors = new ArrayList<String>();
+        GenericResponse res = new GenericResponse(ReturnStatus.OK, null);
+
         try {
             String email = signIn.getEmail();
             Student ret = new Student(); 
@@ -71,24 +85,36 @@ public class StudentRepository implements StudentRepositoryInterface {
                 return ret;
             }, email);
 
-            if (student == null) return failResponse;
+            if (student == null) throw new Exception();
 
             CharSequence charPassword = signIn.getPassword();
             boolean validSignIn = bCryptPasswordEncoder.matches(charPassword, student.getPassword());
             
-            if (!validSignIn) return failResponse;
+            if (!validSignIn) throw new Exception();
 
             jdbcTemplate.update(INSERT_STUDENT_TOKEN, new Object[]{
                 randomUtil.getSaltString(32),
                 student.getStudentId()
             });
 
+            return res;
+
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            errors.add(ResponseMessage.BASE_ERROR);
+            res.setStatus(ReturnStatus.ERROR);
+            res.setErrors(errors);
+            return res;
         }
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).build();
-
+    @Override
+    public Student getStudent(String studentId) {
+        try {
+            Student student = jdbcTemplate.queryForObject(SELECT_STUDENT_BY_ID, new StudentMapper(), studentId);
+            return student;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }
