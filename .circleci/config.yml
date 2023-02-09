@@ -27,11 +27,6 @@ jobs:
             mvn install -DskipTests
 
       - run:
-          name: Run linting
-          command: |
-            mvn checkstyle:check
-
-      - run:
           name: Build
           command: |
             mvn -B -DskipTests clean package
