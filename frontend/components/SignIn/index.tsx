@@ -24,7 +24,7 @@ const SignIn: FC = () => {
     const signIn = async () => {
         let res = await signInStudent(signInStudentForm);
         const { sessionId } = res.data;
-        localStorage.setItem("student-session", sessionId);
+        (typeof window !== 'undefined') && localStorage.setItem("student-session", sessionId);
         console.log(res.data);
     }
 

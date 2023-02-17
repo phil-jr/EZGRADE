@@ -1,14 +1,12 @@
-const studentOptions =  {
-  headers: {
-    "student-session": localStorage.getItem("student-session")
-  }
-}
-
+"use client"
 
 export const getStudentOptions = () => {
+  const studentSession = (typeof window !== 'undefined') ? 
+                          localStorage.getItem("student-session") : 
+                          null;
   return {
     headers: {
-      "student-session": localStorage.getItem("student-session")
+      "student-session": studentSession
     }
   }
 }

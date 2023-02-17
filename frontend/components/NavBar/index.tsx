@@ -5,7 +5,9 @@ import React, {FC} from "react";
 
 const NavBar: FC = () => {
 
-    const studentSignedIn = localStorage.getItem("student-session");
+    const studentSignedIn = (typeof window !== 'undefined') ?
+                          localStorage.getItem("student-session") :
+                          null;
 
     return (
         <>
