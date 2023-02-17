@@ -10,12 +10,14 @@ import com.example.ezgrade.constants.ReturnStatus;
 import com.example.ezgrade.mapper.StudentMapper;
 import com.example.ezgrade.model.GenericResponse;
 import com.example.ezgrade.model.SignIn;
+import com.example.ezgrade.model.SignInResponse;
 import com.example.ezgrade.model.Student;
 import com.example.ezgrade.util.RandomUtil;
 
 import static com.example.ezgrade.constants.StudentsSql.INSERT_STUDENT;
 import static com.example.ezgrade.constants.StudentsSql.SIGN_IN_STUDENT;
 import static com.example.ezgrade.constants.StudentsSql.SELECT_STUDENT_BY_ID;
+import static com.example.ezgrade.constants.StudentsSql.DELETE_STUDENT_SESSION;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,7 @@ public class StudentRepository implements StudentRepositoryInterface {
                 student.getAddress(),
                 student.getCity(),
                 student.getState(),
-                student.getZipcode()
+                student.getZipCode()
             });
 
             return res;
@@ -70,10 +72,12 @@ public class StudentRepository implements StudentRepositoryInterface {
     }
 
     @Override
-    public GenericResponse signIn(SignIn signIn) {
+    public SignInResponse signIn(SignIn signIn) {
 
         List<String> errors = new ArrayList<String>();
-        GenericResponse res = new GenericResponse(ReturnStatus.OK, null);
+        SignInResponse res = new SignInResponse();
+        res.setErrors(errors);
+        res.setStatus(ReturnStatus.OK);
 
         try {
             String email = signIn.getEmail();
@@ -92,14 +96,35 @@ public class StudentRepository implements StudentRepositoryInterface {
             
             if (!validSignIn) throw new Exception();
 
+            String studentSession = randomUtil.getSaltString(32);
+
             jdbcTemplate.update(INSERT_STUDENT_TOKEN, new Object[]{
-                randomUtil.getSaltString(32),
+                studentSession,
                 student.getStudentId()
             });
 
+            res.setSessionId(studentSession);
             return res;
 
         } catch (Exception e) {
+            errors.add(ResponseMessage.BASE_ERROR);
+            res.setStatus(ReturnStatus.ERROR);
+            res.setErrors(errors);
+            return res;
+        }
+    }
+
+    @Override
+    public GenericResponse signOut(String sessionId) {
+
+        List<String> errors = new ArrayList<String>();
+        GenericResponse res = new GenericResponse(ReturnStatus.OK, errors);
+
+        try {
+            jdbcTemplate.update(DELETE_STUDENT_SESSION, new Object[]{ sessionId });
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
             errors.add(ResponseMessage.BASE_ERROR);
             res.setStatus(ReturnStatus.ERROR);
             res.setErrors(errors);

@@ -1,10 +1,10 @@
 "use client"
 
 import { SignUpForm } from "@/models/SignUpForm";
-import { signUpStudent } from "@/services/signUpService";
+import { signUpStudent } from "@/services/StudentService";
 import { FC, useState } from "react"
 
-const Login: FC = () => {
+const SignUp: FC = () => {
 
     const inputStyle = "border border-slate-400 block rounded-sm w-full h-12 p-2";
     const wrapperStyle = "mx-auto block w-10/12 my-2 max-w-lg";
@@ -125,4 +125,4 @@ const Login: FC = () => {
     )
 }
 
-export default Login;
+export default SignUp;

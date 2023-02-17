@@ -10,6 +10,8 @@ public interface StudentRepositoryInterface {
 
     public GenericResponse signIn(SignIn signIn);
 
+    public GenericResponse signOut(String sessionId);
+
     public Student getStudent(String studentId);
 
 }

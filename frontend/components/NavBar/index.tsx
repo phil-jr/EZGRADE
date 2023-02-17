@@ -5,14 +5,36 @@ import React, {FC} from "react";
 
 const NavBar: FC = () => {
 
+    const studentSignedIn = localStorage.getItem("student-session");
+
     return (
         <>
-            <nav className="bg-amber-300 drop-shadow">
+            <nav className="nav-bar-test">
                 <ul className="flex">
-                    <li className="p-4 bg-amber-300 cursor-pointer hover:bg-amber-500"><Link href="/">Home</Link></li>
-                    <li className="p-4 bg-amber-300 cursor-pointer hover:bg-amber-500"><Link href="/login">Login</Link></li>
-                    <li className="p-4 bg-amber-300 cursor-pointer hover:bg-amber-500">Pricing</li>
-                    <li className="p-4 bg-amber-300 cursor-pointer hover:bg-amber-500">About</li>
+                    { !studentSignedIn && 
+                        <li className="nav-bar-li"><Link href="/">Home</Link></li>
+                    }
+                    { !studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/signin">Sign In</Link></li>
+                    }
+                    { !studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/signup">Sign Up</Link></li>
+                    }
+                    { studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/my-gradebook">My Gradebook</Link></li>
+                    }
+                    { studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/settings">Settings</Link></li>
+                    }
+                    { studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/signout">Sign Out</Link></li>
+                    }
+                    { !studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/pricing">Pricing</Link></li>
+                    }
+                    { !studentSignedIn &&
+                        <li className="nav-bar-li"><Link href="/about">About</Link></li>
+                    }
                 </ul>
             </nav>
         </>

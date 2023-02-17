@@ -13,12 +13,12 @@ public class Student {
     private String address;
     private String city;
     private String state;
-    private String zipcode;
+    private String zipCode;
     private Date creationDate;
     
     // Constructors
     public Student(String studentId, String firstName, String lastName, String email, String password, String address,
-        String city, String state, String zipcode, Date creationDate) {
+        String city, String state, String zipCode, Date creationDate) {
       this.studentId = studentId;
       this.firstName = firstName;
       this.lastName = lastName;
@@ -27,7 +27,7 @@ public class Student {
       this.address = address;
       this.city = city;
       this.state = state;
-      this.zipcode = zipcode;
+      this.zipCode = zipCode;
       this.creationDate = creationDate;
     }
 
@@ -106,12 +106,12 @@ public class Student {
       this.state = state;
     }
   
-    public String getZipcode() {
-      return zipcode;
+    public String getZipCode() {
+      return zipCode;
     }
   
-    public void setZipcode(String zipcode) {
-      this.zipcode = zipcode;
+    public void setZipCode(String zipCode) {
+      this.zipCode = zipCode;
     }
 
     public Date getCreationDate() {

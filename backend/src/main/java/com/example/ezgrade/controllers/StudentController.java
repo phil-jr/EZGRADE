@@ -1,5 +1,7 @@
 package com.example.ezgrade.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ezgrade.model.GenericResponse;
 import com.example.ezgrade.model.SignIn;
+import com.example.ezgrade.model.SignInResponse;
 import com.example.ezgrade.model.Student;
 import com.example.ezgrade.services.StudentService;
 
@@ -33,9 +37,19 @@ public class StudentController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<GenericResponse> signIn(@RequestBody SignIn signIn) {
+    public ResponseEntity<SignInResponse> signIn(@RequestBody SignIn signIn) {
         try {
-            GenericResponse res = studentService.signIn(signIn);
+            SignInResponse res = studentService.signIn(signIn);
+            return ResponseEntity.status(HttpStatus.OK).body(res);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } 
+    }
+
+    @GetMapping("/signout")
+    public ResponseEntity<GenericResponse> signOut(@RequestHeader("student-session") String studentSessionId) {
+        try {
+            GenericResponse res = studentService.signOut(studentSessionId);
             return ResponseEntity.status(HttpStatus.OK).body(res);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

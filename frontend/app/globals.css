@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  
+  .nav-bar-test {
+    @apply bg-blue-500 drop-shadow
+  }
+
+  .nav-bar-li {
+    @apply p-4 bg-blue-500 cursor-pointer hover:bg-blue-700 
+  }
+
+}
