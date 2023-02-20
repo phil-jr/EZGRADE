@@ -85,6 +85,13 @@ public class StudentRepository implements StudentRepositoryInterface {
             Student student = jdbcTemplate.queryForObject(SIGN_IN_STUDENT, (rs, rowNum) -> {
                 ret.setStudentId(rs.getString("student_id"));
                 ret.setEmail(rs.getString("email"));
+                ret.setFirstName(rs.getString("first_name"));
+                ret.setLastName(rs.getString("last_name"));
+                ret.setAddress(rs.getString("address"));
+                ret.setPhoneNumber(rs.getString("phone_number"));
+                ret.setCity(rs.getString("city"));
+                ret.setState(rs.getString("state"));
+                ret.setZipCode(rs.getString("zipcode"));
                 ret.setPassword(rs.getString("password"));
                 return ret;
             }, email);
@@ -103,10 +110,13 @@ public class StudentRepository implements StudentRepositoryInterface {
                 student.getStudentId()
             });
 
+            student.setPassword(null);
+            res.setStudent(student);
             res.setSessionId(studentSession);
             return res;
 
         } catch (Exception e) {
+            e.printStackTrace();
             errors.add(ResponseMessage.BASE_ERROR);
             res.setStatus(ReturnStatus.ERROR);
             res.setErrors(errors);

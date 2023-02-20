@@ -14,7 +14,6 @@ import static com.example.ezgrade.constants.StudentClassesSql.SELECT_STUDENT_CLA
 
 import com.example.ezgrade.constants.ReturnStatus;
 import com.example.ezgrade.mapper.StudentClassMapper;
-import com.example.ezgrade.mapper.StudentMapper;
 import com.example.ezgrade.constants.ResponseMessage;
 
 import java.util.ArrayList;

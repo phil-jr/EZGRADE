@@ -1,9 +1,9 @@
-//Get Classes
-export default function GradeBook() {
+import Gradebook from "@/components/Gradebook";
+
+export default function GradeBookPage() { 
   return (
     <>
-      <h1>My Grades</h1>
-      <h1>University Grades</h1>
+      <Gradebook />
     </>
   )
 }

@@ -6,6 +6,7 @@ public class SignInResponse extends GenericResponse {
   }
 
   private String sessionId;
+  private Student student;
 
   public String getSessionId() {
     return sessionId;
@@ -13,6 +14,14 @@ public class SignInResponse extends GenericResponse {
 
   public void setSessionId(String sessionId) {
     this.sessionId = sessionId;
+  }
+
+  public Student getStudent() {
+    return student;
+  }
+
+  public void setStudent(Student student) {
+    this.student = student;
   }
 
 }

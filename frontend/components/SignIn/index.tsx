@@ -26,6 +26,7 @@ const SignIn: FC = () => {
         const { sessionId } = res.data;
         (typeof window !== 'undefined') && localStorage.setItem("student-session", sessionId);
         console.log(res.data);
+        (window as any).location = "/";
     }
 
     return (

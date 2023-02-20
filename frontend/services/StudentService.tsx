@@ -7,12 +7,21 @@ export const signUpStudent = (signUpForm: SignUpForm) => {
   return axios.post('http://localhost:8080/api/students/signup', signUpForm)
 }
 
-
 export const signInStudent = (signInForm: SignInForm) => {
   return axios.post('http://localhost:8080/api/students/signin', signInForm)
 }
 
 export const signOutStudent = () => {
   const options = getStudentOptions();
-  return axios.get("http://localhost:8080/api/students/signout", options)
+  return axios.get("http://localhost:8080/api/students/signout", options);
+}
+
+export const getStudentClasses = () => {
+  const options = getStudentOptions();
+  return axios.get("http://localhost:8080/api/student-classes/get", options);
+}
+
+export const getStudentInstituionClasses = () => {
+  const options = getStudentOptions();
+  return axios.get("http://localhost:8080/api/instructor-classes/student", options)
 }

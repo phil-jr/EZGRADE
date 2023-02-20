@@ -1,16 +1,27 @@
 "use client";
 
+import { signOutStudent } from "@/services/StudentService";
 import Link from "next/link";
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 
 const NavBar: FC = () => {
 
-    const studentSignedIn = (typeof window !== 'undefined') ?
-                          localStorage.getItem("student-session") :
-                          null;
+    const [studentSignedIn, setStudentSignedIn] = useState(localStorage.getItem("student-session")  != null);
+
+    useEffect(() => {
+        const isStudentSignedIn = (typeof window !== 'undefined') && 
+                                  localStorage.getItem("student-session")  != null;
+        setStudentSignedIn(isStudentSignedIn);
+    },[]);
+    
+    const signOutStudentCall = () => {
+        console.log("HELLO");
+        signOutStudent();
+        (window as any).location = "/";
+    }
 
     return (
-        <>
+        <div>
             <nav className="nav-bar-test">
                 <ul className="flex">
                     { !studentSignedIn && 
@@ -23,13 +34,13 @@ const NavBar: FC = () => {
                         <li className="nav-bar-li"><Link href="/signup">Sign Up</Link></li>
                     }
                     { studentSignedIn &&
-                        <li className="nav-bar-li"><Link href="/my-gradebook">My Gradebook</Link></li>
+                        <li className="nav-bar-li"><Link href="/gradebook">My Gradebook</Link></li>
                     }
                     { studentSignedIn &&
                         <li className="nav-bar-li"><Link href="/settings">Settings</Link></li>
                     }
                     { studentSignedIn &&
-                        <li className="nav-bar-li"><Link href="/signout">Sign Out</Link></li>
+                        <li className="nav-bar-li"><Link href="/" onClick={signOutStudentCall}>Sign Out</Link></li>
                     }
                     { !studentSignedIn &&
                         <li className="nav-bar-li"><Link href="/pricing">Pricing</Link></li>
@@ -39,7 +50,7 @@ const NavBar: FC = () => {
                     }
                 </ul>
             </nav>
-        </>
+        </div>
     )
 }
 

@@ -1,5 +1,6 @@
 import NavBar from '@/components/NavBar'
 import './globals.css'
+import { UserContextProvider } from '@/context/UserContext'
 
 export default function RootLayout({
   children,
@@ -14,7 +15,9 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <NavBar />
+      <UserContextProvider>
+          <NavBar />
+      </UserContextProvider>
         <div className="p-4">
           {children}
         </div>
