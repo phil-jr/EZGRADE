@@ -30,9 +30,6 @@ const NavBar: FC = () => {
                     { !studentSignedIn &&
                         <li className="nav-bar-li"><Link href="/signin">Sign In</Link></li>
                     }
-                    { !studentSignedIn &&
-                        <li className="nav-bar-li"><Link href="/signup">Sign Up</Link></li>
-                    }
                     { studentSignedIn &&
                         <li className="nav-bar-li"><Link href="/gradebook">My Gradebook</Link></li>
                     }
@@ -40,7 +37,7 @@ const NavBar: FC = () => {
                         <li className="nav-bar-li"><Link href="/settings">Settings</Link></li>
                     }
                     { studentSignedIn &&
-                        <li className="nav-bar-li"><Link href="/" onClick={signOutStudentCall}>Sign Out</Link></li>
+                        <li className="nav-bar-li"><Link href="#" onClick={signOutStudentCall}>Sign Out</Link></li>
                     }
                     { !studentSignedIn &&
                         <li className="nav-bar-li"><Link href="/pricing">Pricing</Link></li>

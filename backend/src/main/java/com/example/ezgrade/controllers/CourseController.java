@@ -10,29 +10,32 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ezgrade.model.InstructorClass;
+import com.example.ezgrade.model.Course;
 import com.example.ezgrade.model.Student;
-import com.example.ezgrade.services.InstructorClassService;
+import com.example.ezgrade.model.CourseResponse.CourseCard;
+import com.example.ezgrade.services.CourseService;
 import com.example.ezgrade.services.StudentSessionService;
 
 @RestController
-@RequestMapping("api/instructor-classes")
-public class StudentInstructorController {
+@RequestMapping("api/courses")
+public class CourseController {
 
   @Autowired
-  InstructorClassService instructorClassService;
+  CourseService courseService;
 
   @Autowired
   StudentSessionService studentSessionService;
-
+  
   @GetMapping("/student")
-  public ResponseEntity<List<InstructorClass>> getStudentInstructorClasses(@RequestHeader("student-session") String studentSessionId) {
+  public ResponseEntity<Object> signOut(@RequestHeader("student-session") String studentSessionId) {
       try {
           Student student = studentSessionService.getStudent(studentSessionId);
-          List<InstructorClass> res = instructorClassService.getStudentClassesByStudentId(student.getStudentId());
-          return ResponseEntity.status(HttpStatus.OK).body(res);
+          List<CourseCard> courses = courseService.getCourses(student.getStudentId());
+          return ResponseEntity.status(HttpStatus.OK).body(courses);
       } catch (Exception e) {
+          e.printStackTrace();
           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
       } 
   }
+
 }

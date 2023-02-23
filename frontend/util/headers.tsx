@@ -10,3 +10,7 @@ export const getStudentOptions = () => {
     }
   }
 }
+
+export const removeLocalStorageItems = () => {
+  (typeof window !== 'undefined') && localStorage.removeItem("student-session")
+}

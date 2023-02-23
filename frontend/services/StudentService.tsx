@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SignUpForm } from '@/models/SignUpForm';
 import { SignInForm } from '@/models/SignInForm';
-import { getStudentOptions } from '@/util/headers';
+import { getStudentOptions, removeLocalStorageItems } from '@/util/headers';
 
 export const signUpStudent = (signUpForm: SignUpForm) => {
   return axios.post('http://localhost:8080/api/students/signup', signUpForm)
@@ -13,6 +13,7 @@ export const signInStudent = (signInForm: SignInForm) => {
 
 export const signOutStudent = () => {
   const options = getStudentOptions();
+  removeLocalStorageItems()
   return axios.get("http://localhost:8080/api/students/signout", options);
 }
 

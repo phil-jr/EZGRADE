@@ -10,11 +10,12 @@ import com.example.ezgrade.mapper.StudentMapper;
 import com.example.ezgrade.model.Student;
 
 @Repository
-public class StudentSessionRepository {
+public class StudentSessionRepository implements StudentSessionRepositoryInterface{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Override
     public Student getStudent(String studentSessionId) {
 
         try {

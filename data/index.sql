@@ -8,6 +8,7 @@ CREATE TABLE student_classes (
   category VARCHAR(255) NOT NULL,
   sub_category VARCHAR(255) NOT NULL,
   creation_date DATETIME NOT NULL,
+  grade FLOAT NULL,
   FOREIGN KEY (student_id) REFERENCES students(student_id) 
 );
 
@@ -61,6 +62,7 @@ CREATE TABLE enrollments (
   instructor_class_id VARCHAR(16) NOT NULL,
   student_id VARCHAR(16) NOT NULL,
   enrollment_date DATETIME NOT NULL,
+  grade NULL,
   status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
   PRIMARY KEY (instructor_class_id, student_id),
   FOREIGN KEY (instructor_class_id) REFERENCES instructor_classes(instructor_class_id),

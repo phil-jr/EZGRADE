@@ -34,9 +34,10 @@ const SignUp: FC = () => {
     }
 
     return (
-        <div className="flex flex-col bg-teal-400 w-3/5 mr-auto ml-auto">
+        <div className="flex flex-col sm:w-3/5 max-w-xl w-full mr-auto ml-auto">
+            <h1 className="mx-auto p-4 text-2xl font-bold">Sign Up for EzGrade</h1>       
             <div className={wrapperStyle}>
-                <label htmlFor="firstName" className="font-bold text-lg">First Name:</label>
+                {/* <label htmlFor="firstName" className="font-bold text-lg">First Name:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.firstName} 
                         name="firstName" 
@@ -46,7 +47,7 @@ const SignUp: FC = () => {
                 />
             </div>    
             <div className={wrapperStyle}>
-                <label htmlFor="lastName" className="font-bold text-lg">Last Name:</label>
+                {/* <label htmlFor="lastName" className="font-bold text-lg">Last Name:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.lastName} 
                         name="lastName" 
@@ -56,7 +57,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="email" className="font-bold text-lg">Email:</label>
+                {/* <label htmlFor="email" className="font-bold text-lg">Email:</label> */}
                 <input type="email" 
                         value={signUpStudentForm.email} 
                         name="email" 
@@ -66,7 +67,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="phoneNumber" className="font-bold text-lg">Phone Number:</label>
+                {/* <label htmlFor="phoneNumber" className="font-bold text-lg">Phone Number:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.phoneNumber} 
                         name="phoneNumber" 
@@ -76,7 +77,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="city" className="font-bold text-lg">City:</label>
+                {/* <label htmlFor="city" className="font-bold text-lg">City:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.city} 
                         name="city" 
@@ -86,7 +87,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="state" className="font-bold text-lg">State:</label>
+                {/* <label htmlFor="state" className="font-bold text-lg">State:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.state} 
                         name="state" 
@@ -96,7 +97,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="zipCode" className="font-bold text-lg">Zip Code:</label>
+                {/* <label htmlFor="zipCode" className="font-bold text-lg">Zip Code:</label> */}
                 <input type="text" 
                         value={signUpStudentForm.zipCode} 
                         name="zipCode" 
@@ -106,7 +107,7 @@ const SignUp: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="password" className="font-bold text-lg">Password:</label>
+                {/* <label htmlFor="password" className="font-bold text-lg">Password:</label> */}
                 <input type="password" 
                         value={signUpStudentForm.password} 
                         name="password" 
@@ -117,7 +118,7 @@ const SignUp: FC = () => {
             </div> 
             <div className={wrapperStyle}>
                 <button onClick={signUp}
-                        className="bg-slate-400 px-8 py-2 m-4 ml-0 rounded-full w-48">
+                        className=" bg-sky-600 px-8 py-2 mx-4 mb-2 ml-0 rounded-sm w-full">
                         Sign Up
                 </button>
             </div>

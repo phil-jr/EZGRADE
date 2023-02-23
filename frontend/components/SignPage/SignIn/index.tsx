@@ -30,9 +30,10 @@ const SignIn: FC = () => {
     }
 
     return (
-        <div className="flex flex-col bg-teal-400 w-3/5 mr-auto ml-auto">
+        <div className="flex flex-col sm:w-3/5 max-w-xl w-full mr-auto ml-auto">
+            <h1 className="mx-auto p-4 text-2xl font-bold">Log into EzGrade</h1>
             <div className={wrapperStyle}>
-                <label htmlFor="email" className="font-bold text-lg">Email:</label>
+                {/* <label htmlFor="email" className="font-bold text-lg">Email:</label> */}
                 <input type="email" 
                         value={signInStudentForm.email} 
                         name="email" 
@@ -42,7 +43,7 @@ const SignIn: FC = () => {
                 />
             </div>
             <div className={wrapperStyle}>
-                <label htmlFor="password" className="font-bold text-lg">Password:</label>
+                {/* <label htmlFor="password" className="font-bold text-lg">Password:</label> */}
                 <input type="password" 
                         value={signInStudentForm.password} 
                         name="password" 
@@ -53,7 +54,7 @@ const SignIn: FC = () => {
             </div> 
             <div className={wrapperStyle}>
                 <button onClick={signIn}
-                        className="bg-slate-400 px-8 py-2 m-4 ml-0 rounded-full w-48">
+                        className=" bg-sky-600 px-8 py-2 mx-4 mb-2 ml-0 rounded-sm w-full">
                         Sign In
                 </button>
             </div>
