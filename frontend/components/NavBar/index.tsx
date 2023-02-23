@@ -6,7 +6,7 @@ import React, {FC, useEffect, useState} from "react";
 
 const NavBar: FC = () => {
 
-    const [studentSignedIn, setStudentSignedIn] = useState(localStorage.getItem("student-session")  != null);
+    const [studentSignedIn, setStudentSignedIn] = useState(false);
 
     useEffect(() => {
         const isStudentSignedIn = (typeof window !== 'undefined') && 
