@@ -19,10 +19,10 @@ export const signOutStudent = () => {
 
 export const getStudentClasses = () => {
   const options = getStudentOptions();
-  return axios.get("http://localhost:8080/api/student-classes/get", options);
+  return axios.get("http://localhost:8080/api/courses/student", options);
 }
 
 export const getStudentInstituionClasses = () => {
   const options = getStudentOptions();
-  return axios.get("http://localhost:8080/api/instructor-classes/student", options)
+  return axios.get("http://localhost:8080/api/courses/student", options)
 }

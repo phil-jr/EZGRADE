@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.example.ezgrade.model.CourseResponse.CourseCard;
 
-public class CourseCardMapper implements RowMapper<CourseCard> {
+public class CourseCardStudentMapper implements RowMapper<CourseCard> {
   
 
   @Override

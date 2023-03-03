@@ -24,4 +24,12 @@ body {
     @apply border-4 border-rose-800 cursor-pointer p-4 w-1/2 text-center
   }
 
+  .default-input {
+    @apply border border-slate-400 block rounded-sm w-full h-12 p-2
+  }
+
+  .section-input {
+    @apply border border-slate-400 rounded-sm w-full h-12 p-2 m-2
+  }
+
 }
